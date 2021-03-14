@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+
+<struts>
+    <!--设置三个常量元素,设置程序的运行模式/语言环境 /设置编码方式-->
+    <!-- devMode开发模式，修改struts文件不用重启tomcat -->
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.locale" value="zh_CN" />
+    <constant name="struts.i18n.encoding" value="utf-8" />
+
+    <!-- 这个包必须继承"struts-default"才能使用result等标签，且同一个应用中name属性值必须唯一。 -->
+	<package name="struts2" extends="struts-default" >
+		<action name="login" class="com.action.LoginAction" >
+			<result name="success">/index.jsp</result>
+			<result name="error">/error.jsp</result>		
+			<result name="login">/login.jsp</result>	
+			<result name="input">/login.jsp</result>	
+		</action>	
+		
+				<action name="test" class="com.action.TestAction" >
+			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>		
+
+			<result name="input">/login.jsp</result>	
+		</action>	
+		
+		<action name="register" class="com.action.RegisterAction" >
+			<result name="success">/login.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="miduser" class="com.action.MidUserAction" >
+			<result name="success">/files/updateuser.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="updateuser" class="com.action.UpdateUserAction" >
+			 <result name="success" type="chain">miduser</result>
+			<!--<result name="success" type="redirectAction">
+				<param name="actionName">listuser</param>
+				<param name="state">1</param>
+			</result>
+			 -->
+			<result name="error">/error.jsp</result>		
+		</action>	
+		<action name="middepart" class="com.action.MidDepartAction" >
+			<result name="success">/files/listdepart.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="deletedepart" class="com.action.DeleteDepartAction" >
+			<result name="success" type="redirectAction">middepart</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="listuser" class="com.action.ListUserAction" >
+			<result name="success">/files/listuser.jsp</result>
+			<result name="userinfo">/files/userinfo.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="deleteuser" class="com.action.DeleteUserAction" >
+			<!--<result name="success" type="redirectAction">listuser</result>-->
+			<result name="success" type="redirectAction">
+				<param name="actionName">listuser</param>
+				<param name="state">1</param>
+			</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="adddepart" class="com.action.AddDepartAction" >
+			<result name="success" type="redirectAction">middepart</result>
+
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="midactivities" class="com.action.MidActivitiesAction" >
+			<result name="success">/files/listactivities.jsp</result>
+			<result name="my">/files/myactivitise.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="deleteactivities" class="com.action.DeleteActivitiesAction" >
+			<result name="success" type="chain">midactivities</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="addactivities" class="com.action.AddActivitiesAction" >
+			<result name="success" type="chain">midactivities</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="midnotices" class="com.action.MidNoticesAction" >
+			<result name="success">/files/listnotices.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="addnotices" class="com.action.AddNoticesAction" >
+			<result name="success" type="chain">midnotices</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="applyactivities" class="com.action.ApplyActivitiesAction" >
+			<!-- <result name="success">/success.jsp</result>  -->
+			<result name="success" type="redirectAction">
+				<param name="actionName">midactivities</param>
+				<param name="state">1</param>
+			</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="midauditactivities" class="com.action.MidAuditActivitiesAction" >
+			<result name="success">/files/auditactivities.jsp</result>
+			<result name="error">/error.jsp</result>		
+		</action>
+		<action name="auditactivities" class="com.action.AuditActivitiesAction" >
+			<result name="success" type="redirectAction">midauditactivities</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<action name="midvarecord" class="com.action.MidVarecordAction" >
+			<result name="success">/files/varecord.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="cancelapply" class="com.action.CancelApplyAction" >
+		<!--<result name="success"  type="redirectAction">midactivities</result>-->
+			<result name="success" type="redirectAction">
+				<param name="actionName">midactivities</param>
+				<param name="state">1</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<action name="noticecontent" class="com.action.NoticeContentAction" >
+			<result name="success">/files/noticecontent.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<action name="updatepassword" class="com.action.UpdatePasswordAction" >
+			<result name="success">/login.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>	
+		<action name="addopinion" class="com.action.AddOpinionAction" >
+			<result name="success">files/addopinion.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="listopinion" class="com.action.ListOpinionAction" >
+			<result name="success">files/listopinion.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="applydepart" class="com.action.ApplyDepartAction" >
+			<result name="success" type="redirectAction">middepart</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="exitdepart" class="com.action.ExitDepartAction" >
+			<result name="success" type="redirectAction">middepart</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="active" class="com.action.ActiveAction" >
+			<result name="success">/login.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+	</package>
+
+</struts>
