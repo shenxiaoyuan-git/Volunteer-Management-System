@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <!-- ORM元数据  表对象关系映射文件 
+    	package : 配置该配置文件中类所在的包.  -->
+ <hibernate-mapping package="com.domain" >
+ 	<class name="Volactivities" table="va"  >
+
+		<id name="vaid" column="vaid" >
+			<generator class="native"></generator>
+		</id> 	
+		<!-- state:0未审核，1审核通过，2审核失败 -->
+		<property name="state" column="state"></property>
+		<property name="applydate" column="applydate"></property>
+		<many-to-one name="volunteers" class="Volunteers" column="id"></many-to-one>
+		<many-to-one name="activities" class="Activities" column="aid"></many-to-one>
+ 	</class>
+ </hibernate-mapping>

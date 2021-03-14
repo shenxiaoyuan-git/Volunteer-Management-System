@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <!-- ORM元数据  表对象关系映射文件 
+    	package : 配置该配置文件中类所在的包.  -->
+ <hibernate-mapping package="com.domain" >
+ 	<class name="Activities" table="activity"  >
+
+		<id name="aid" column="aid" >
+			<generator class="native"></generator>
+		</id> 	
+		<property name="aname" column="aname"></property>
+		<property name="aaddress" column="aaddress"></property>
+		<property name="aintro" column="aintro"></property>
+		<property name="astart" column="astart"></property>
+		<property name="aend" column="aend"></property>
+		<property name="aleader" column="aleader"></property>
+		<property name="atel" column="atel"></property>
+		<set name="volactivities">
+			<key column="aid"></key>
+			<one-to-many class="Volactivities"/>
+		</set>
+		<set name="varecord"  lazy="false">
+			<key column="aid"></key>
+			<one-to-many class="Varecord"/>
+		</set>
+ 	</class>
+ </hibernate-mapping>
